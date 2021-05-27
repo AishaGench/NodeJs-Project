@@ -1,19 +1,15 @@
+
+
 const https = require("https");
 
 const options = {
-  method: 'PUT',
+  method: 'DELETE',
   host: 'jsonplaceholder.typicode.com',
   path: '/users/1',
   headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json; charset=UTF-8'
+    'Accept': 'application/json'
   }
 };
-
-const requestData = {
-    username: 'doejohn',  
-};
-  
 
 let request = https.request(options,  (res) => {
     //console.log(res)
@@ -21,7 +17,7 @@ let request = https.request(options,  (res) => {
         console.error(`Did not get an OK from the server. Code: ${res.statusCode}`);
         res.resume();
         return;
-    }
+    };
       let data = '';
 
       res.on("data", (chunk) => {
@@ -36,11 +32,8 @@ let request = https.request(options,  (res) => {
     
  });
 
- request.write(JSON.stringify(requestData));
-
  request.end()
 
  request.on('error', (err) => {
     console.error(`Encountered an error trying to make a request: ${err.message}`);
   });
-  
