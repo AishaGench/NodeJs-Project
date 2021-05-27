@@ -51,7 +51,7 @@ let request = https.request(options,  (res) => {
         console.error(`Did not get an OK from the server. Code: ${res.statusCode}`);
         res.resume();
         return;
-    };
+    }
       let data = '';
 
       res.on("data", (chunk) => {
