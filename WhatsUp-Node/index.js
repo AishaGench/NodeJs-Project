@@ -26,6 +26,9 @@ app.use(express.static(path.join(__dirname, "public")));
   app.get("/user", (req, res) => {
     res.render("user", {title:"Profile", userProfile:{nickname:"Auth0"}});
  });
+ app.get("/logout", (req, res) => {
+    res.redirect("/");
+ });
  
 
 
