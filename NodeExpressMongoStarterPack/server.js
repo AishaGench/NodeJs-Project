@@ -1,5 +1,6 @@
 const express = require('express')
 var bodyParser = require('body-parser');
+const MongoClient = require('mongodb').MongoClient
 
 const app =express();
 const port = 3000;
@@ -12,15 +13,16 @@ app.get("/", (req,res)=>{
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.post('/update', function(req, res) {
+app.post('/quotes', function(req, res) {
   const { name, description } = req.body;
-  res.send(`Name name, desc description`);
+  res.send(`Name ${name}, desc ${description}`);
 });
 
 
-app.post("/quotes",((req,res)=>{
-    console.log("This is Post request")
-}))
+// app.post("/quotes",((req,res)=>{
+//     console.log(req.body.name)
+//     console.log(req.body.quote)
+// }))
 
 
 
