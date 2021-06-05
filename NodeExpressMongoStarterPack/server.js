@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 
 app.set("view engine", "pug");
 
+app.use(express.static('public'))
 app.use(bodyParser.json());
 
 const connectionString = "mongodb://127.0.0.1:27017"
@@ -18,16 +19,18 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
     const db = client.db('my-database');
     const quotesCollection = db.collection('my-collection')
 
+    
+
     app.use(bodyParser.urlencoded({extended: true}));
 
     app.get("/", (req,res)=>{
-        // res.send("Hello world!");
-        res.render("index",{quotes:results})
-        const cursor = db.collection('quotes').find().toArray()
-        .then((res=>{console.log(res)}))
-      
-        console.log(cursor)
-
+        
+        const cursor = db.collection('my-collection').find().toArray()
+        .then(resDataBase=>{
+            console.log(resDataBase);
+            res.render("index", {quotes: resDataBase});
+        })
+        
     })
 
     app.post('/quotes', function(req, res) {
@@ -36,13 +39,35 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 
         quotesCollection.insertOne(req.body)
         .then(result => {
-            console.log(result)
-            res.redirect('/')
+            console.log(result);
+            res.redirect('/');
         })
         .catch(error => console.error(error))
         
-
     });
+
+    app.put('/quotes', (req, res) => {
+        console.log(req.body);
+
+        quotesCollection.findOneAndUpdate(
+            { name: 'enes' },		// write it manually from your quotes
+            {
+              $set: {
+                name: req.body.name,
+                quote: req.body.quote
+              }
+            },
+            {
+              upsert: true
+            }
+          )
+          .then(res => {
+            res.json('Success')
+           })
+            .catch(error => console.error(error))
+        
+      })   
+    
 
       app.listen(port, ((req,res)=>{
         console.log("The server is running on port ", port)
