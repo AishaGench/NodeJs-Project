@@ -24,3 +24,12 @@ exports.findAll = (req,res) => {
     )
     .catch((err)=>{res.status(400).send(err)})
 }
+
+exports.findOne = (req,res) => {
+    User.findById(req.params.id)
+    .then((user)=>{
+        if(user)res.send(user)
+    })
+    .catch((err)=>{res.status(400).send(err)})
+}
+
