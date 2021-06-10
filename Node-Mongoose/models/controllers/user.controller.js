@@ -41,3 +41,10 @@ exports.deleteEnes = (req,res) => {
     .catch((err)=>{res.status(400).send(err)})
 }
 ​
+exports.updateAysegul = (req,res) => {
+    User.findByIdAndUpdate(req.params.id,req.body, {new:true})
+    .then((user)=>{
+        if(user)res.send(user)
+    })
+    .catch((err)=>{res.status(400).send(err)})
+}
