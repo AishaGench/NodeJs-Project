@@ -33,3 +33,11 @@ exports.findOne = (req,res) => {
     .catch((err)=>{res.status(400).send(err)})
 }
 
+exports.deleteEnes = (req,res) => {
+    User.findByIdAndRemove(req.params.id)
+    .then((user)=>{
+        if(user)res.send(user)
+    })
+    .catch((err)=>{res.status(400).send(err)})
+}
+​
