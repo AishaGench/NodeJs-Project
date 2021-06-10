@@ -5,6 +5,7 @@ const app = express()
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
+app.use("/users", require("./routes/user.route"));
 
 app.get('/', (req, res) => res.send('Welcome to Students Database!'))
 
