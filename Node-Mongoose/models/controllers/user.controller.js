@@ -16,3 +16,11 @@ exports.create = (req,res) => {
     .catch((err)=>{res.send(err)})
 ​
 }
+
+exports.findAll = (req,res) => {
+    User.find()
+    .then((users)=>{
+        res.status(200).send(users)}
+    )
+    .catch((err)=>{res.status(400).send(err)})
+}
