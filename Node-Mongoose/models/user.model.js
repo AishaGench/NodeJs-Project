@@ -54,9 +54,9 @@ const userSchema = new db.Schema({
         strict: true,
     versionKey: false,
     timestamps: { createdAt: "createdAt", updatedAt: "updatedAt"
-},
-
-  
+}, 
 
 })
+
+module.exports = db.model('User', userSchema)
 
