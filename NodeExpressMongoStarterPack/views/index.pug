@@ -1,23 +1,25 @@
 html 
+    head 
+        link(rel="stylesheet", href="styles.css")
     body 
         h1 May Node and Express be with you.
-        form(action="/quotes" method= "POST") 
+        form(action="/quotes" method="POST") 
             input(name="name" placeholder="name!!!!")
             input(name="quotes")
             button Submit
             pre=JSON.stringify(quotes, null, 2)
-            div
+            div 
                 ul 
                     each quote in quotes
                         li 
-                            span=quote.name 
-                            br
-                            span=quote.quotes 
-            div 
-                h2 Writer Quotes!
-                p Replace first chosen quote with a quote written by Writer
-                button(id="update-button") Replace  
-
-                            
-
-
+                            span=quote.name
+                            br  
+                            span=quote.quotes
+        div 
+            h2 Writer Quotes 
+            p Replace first chosen quote with a quote written by Writer
+            button(id="update-button") Replace
+        div 
+            h2 Delete Section 
+            button(id="delete-button") Delete
+        script(src="/main.js")

@@ -8,7 +8,7 @@ updateButton.addEventListener('click', _ => {
       method: 'put',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        name: 'Writer',
+        name: "Writer",
         quote: 'I find your lack of faith disturbing.'
       })
     })
@@ -21,7 +21,7 @@ deleteButton.addEventListener('click', _ => {
       method: 'delete',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        name: 'Writer'
+        name: 'Aysegul'
       })
     })
     .then(res => {

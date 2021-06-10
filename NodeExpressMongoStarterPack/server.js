@@ -10,7 +10,7 @@ app.use(express.static('public'))
 app.use(bodyParser.json());
 
 const connectionString = "mongodb://127.0.0.1:27017"
-
+ app.use(bodyParser.urlencoded({extended: true}));
 const MongoClient = require('mongodb').MongoClient
 
 MongoClient.connect(connectionString, { useUnifiedTopology: true })
@@ -18,10 +18,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
     console.log('Connected to Database');
     const db = client.db('my-database');
     const quotesCollection = db.collection('my-collection')
-
-    
-
-    app.use(bodyParser.urlencoded({extended: true}));
+   
 
     app.get("/", (req,res)=>{
         
@@ -29,8 +26,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
         .then(resDataBase=>{
             console.log(resDataBase);
             res.render("index", {quotes: resDataBase});
-        })
-        
+        }) 
     })
 
     app.post('/quotes', function(req, res) {
@@ -50,7 +46,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
         console.log(req.body);
 
         quotesCollection.findOneAndUpdate(
-            { name: 'enes' },		// write it manually from your quotes
+            { name: 'Aysegul' },		// write it manually from your quotes
             {
               $set: {
                 name: req.body.name,
@@ -61,14 +57,30 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
               upsert: true
             }
           )
-          .then(res => {
-            res.json('Success')
-           })
+          .then(result => 
+            //console.log(result)
+            res.json(result)
+           )
             .catch(error => console.error(error))
         
-      })   
-    
+      })
 
+      app.delete("/quotes", (req,res)=>{
+        quotesCollection.deleteOne(
+          { name: req.body.name },
+        
+        )
+        .then(result => {
+          if (result.deletedCount === 0) {
+            return res.json('No quote to delete')
+          }
+            res.json(`Deleted Writer's quote`)
+          })
+        .catch(error => console.error(error))
+   
+      })
+
+      
       app.listen(port, ((req,res)=>{
         console.log("The server is running on port ", port)
     }))
@@ -84,4 +96,3 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 // app.post("/quotes", (req, res)=>{
 //     console.log(req)
 // })
-
