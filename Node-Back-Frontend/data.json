@@ -1,0 +1,35 @@
+[
+  {
+	"name": "ABCD",
+	"email": "abcd@test.com",
+	"phone": 987654321,
+	"city": "Mangalore",
+	"country": "India",
+	"itemsSold": ["Shoes", "Socks"],
+	"jobProfile": "Shoe sales",
+	"additionalInfo": "Buys Products Rarely",
+	"isActive": false
+},
+{
+	"name": "John Smith",
+	"email": "jsmith@test.com",
+	"phone": 123456789,
+	"city": "bangalore",
+	"country": "India",
+	"itemsSold": ["CD", "DVD", "Games"],
+	"jobProfile": "Software Developer",
+	"additionalInfo": "Has Bought a lot of products before and a high Value Customer",
+	"isActive": true
+},
+{
+	"name": "Tyrion",
+	"email": "tyrion@test.com",
+	"phone": "123412345",
+	"city": "Chennai",
+	"country": "India",
+	"itemsSold": ["Firewall", "Security", "Games"],
+	"jobProfile": "Software Developer",
+	"additionalInfo": "Buys Lots of Products in general",
+	"isActive": true
+}
+]
